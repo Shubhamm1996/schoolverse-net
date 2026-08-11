@@ -15,11 +15,13 @@ import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DailyQuoteRouteImport } from './routes/daily-quote'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PrincipalMessageRouteImport } from './routes/principal-message'
 import { Route as ResultsRouteImport } from './routes/results'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
@@ -53,6 +55,11 @@ const DailyQuoteRoute = DailyQuoteRouteImport.update({
   path: '/daily-quote',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
@@ -78,6 +85,11 @@ const ResultsRoute = ResultsRouteImport.update({
   path: '/results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -96,12 +108,14 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/daily-quote': typeof DailyQuoteRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/events': typeof EventsRoute
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +131,7 @@ export interface FileRoutesByTo {
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/news': typeof NewsIndexRoute
 }
 export interface FileRoutesById {
@@ -127,12 +142,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/daily-quote': typeof DailyQuoteRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/events': typeof EventsRoute
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
 }
 export interface FileRouteTypes {
@@ -144,12 +161,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/daily-quote'
+    | '/dashboard'
     | '/events'
     | '/faculty'
     | '/gallery'
     | '/principal-message'
     | '/results'
     | '/news/$slug'
+    | '/dashboard/'
     | '/news/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +184,7 @@ export interface FileRouteTypes {
     | '/principal-message'
     | '/results'
     | '/news/$slug'
+    | '/dashboard'
     | '/news'
   id:
     | '__root__'
@@ -174,12 +194,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/daily-quote'
+    | '/dashboard'
     | '/events'
     | '/faculty'
     | '/gallery'
     | '/principal-message'
     | '/results'
     | '/news/$slug'
+    | '/dashboard/'
     | '/news/'
   fileRoutesById: FileRoutesById
 }
@@ -190,6 +212,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DailyQuoteRoute: typeof DailyQuoteRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   EventsRoute: typeof EventsRoute
   FacultyRoute: typeof FacultyRoute
   GalleryRoute: typeof GalleryRoute
@@ -243,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DailyQuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events': {
       id: '/events'
       path: '/events'
@@ -278,6 +308,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/news/': {
       id: '/news/'
       path: '/news'
@@ -295,6 +332,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -302,6 +351,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DailyQuoteRoute: DailyQuoteRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   EventsRoute: EventsRoute,
   FacultyRoute: FacultyRoute,
   GalleryRoute: GalleryRoute,
