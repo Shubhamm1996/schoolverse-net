@@ -14,16 +14,344 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admissions: {
+        Row: {
+          applying_for_class: string
+          created_at: string
+          date_of_birth: string
+          documents: Json
+          father_name: string
+          gender: string
+          guardian_email: string
+          guardian_occupation: string | null
+          guardian_phone: string
+          id: string
+          mother_name: string | null
+          notes: string | null
+          previous_class: string | null
+          previous_percentage: string | null
+          previous_school: string | null
+          status: string
+          student_address: string | null
+          student_name: string
+        }
+        Insert: {
+          applying_for_class: string
+          created_at?: string
+          date_of_birth: string
+          documents?: Json
+          father_name: string
+          gender: string
+          guardian_email: string
+          guardian_occupation?: string | null
+          guardian_phone: string
+          id?: string
+          mother_name?: string | null
+          notes?: string | null
+          previous_class?: string | null
+          previous_percentage?: string | null
+          previous_school?: string | null
+          status?: string
+          student_address?: string | null
+          student_name: string
+        }
+        Update: {
+          applying_for_class?: string
+          created_at?: string
+          date_of_birth?: string
+          documents?: Json
+          father_name?: string
+          gender?: string
+          guardian_email?: string
+          guardian_occupation?: string | null
+          guardian_phone?: string
+          id?: string
+          mother_name?: string | null
+          notes?: string | null
+          previous_class?: string | null
+          previous_percentage?: string | null
+          previous_school?: string | null
+          status?: string
+          student_address?: string | null
+          student_name?: string
+        }
+        Relationships: []
+      }
+      daily_quotes: {
+        Row: {
+          author: string | null
+          created_at: string
+          id: string
+          quote: string
+          quote_date: string
+        }
+        Insert: {
+          author?: string | null
+          created_at?: string
+          id?: string
+          quote: string
+          quote_date?: string
+        }
+        Update: {
+          author?: string | null
+          created_at?: string
+          id?: string
+          quote?: string
+          quote_date?: string
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string
+          id: string
+          location: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date: string
+          id?: string
+          location?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string
+          id?: string
+          location?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      exam_results: {
+        Row: {
+          class_name: string
+          created_at: string
+          description: string | null
+          exam_name: string
+          file_url: string | null
+          id: string
+          published: boolean
+          title: string
+        }
+        Insert: {
+          class_name: string
+          created_at?: string
+          description?: string | null
+          exam_name: string
+          file_url?: string | null
+          id?: string
+          published?: boolean
+          title: string
+        }
+        Update: {
+          class_name?: string
+          created_at?: string
+          description?: string | null
+          exam_name?: string
+          file_url?: string | null
+          id?: string
+          published?: boolean
+          title?: string
+        }
+        Relationships: []
+      }
+      faculty: {
+        Row: {
+          bio: string | null
+          created_at: string
+          designation: string
+          id: string
+          name: string
+          photo_url: string | null
+          sort_order: number
+          subject: string | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          designation: string
+          id?: string
+          name: string
+          photo_url?: string | null
+          sort_order?: number
+          subject?: string | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          designation?: string
+          id?: string
+          name?: string
+          photo_url?: string | null
+          sort_order?: number
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      gallery_albums: {
+        Row: {
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      gallery_images: {
+        Row: {
+          album_id: string | null
+          caption: string | null
+          created_at: string
+          id: string
+          storage_path: string | null
+          url: string
+        }
+        Insert: {
+          album_id?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          storage_path?: string | null
+          url: string
+        }
+        Update: {
+          album_id?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          storage_path?: string | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_images_album_id_fkey"
+            columns: ["album_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_albums"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      news: {
+        Row: {
+          author_id: string | null
+          category: string
+          content: string
+          cover_url: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          published: boolean
+          published_at: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string
+          content?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          category?: string
+          content?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "teacher" | "student"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +478,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "teacher", "student"],
+    },
   },
 } as const
