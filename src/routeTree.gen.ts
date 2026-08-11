@@ -22,8 +22,10 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PrincipalMessageRouteImport } from './routes/principal-message'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAdmissionsRouteImport } from './routes/dashboard.admissions'
 import { Route as DashboardGalleryRouteImport } from './routes/dashboard.gallery'
 import { Route as DashboardNewsRouteImport } from './routes/dashboard.news'
+import { Route as DashboardResultsRouteImport } from './routes/dashboard.results'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
@@ -92,6 +94,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAdmissionsRoute = DashboardAdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardGalleryRoute = DashboardGalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -100,6 +107,11 @@ const DashboardGalleryRoute = DashboardGalleryRouteImport.update({
 const DashboardNewsRoute = DashboardNewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardResultsRoute = DashboardResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
   getParentRoute: () => DashboardRoute,
 } as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
@@ -126,8 +138,10 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/admissions': typeof DashboardAdmissionsRoute
   '/dashboard/gallery': typeof DashboardGalleryRoute
   '/dashboard/news': typeof DashboardNewsRoute
+  '/dashboard/results': typeof DashboardResultsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -144,8 +158,10 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/admissions': typeof DashboardAdmissionsRoute
   '/dashboard/gallery': typeof DashboardGalleryRoute
   '/dashboard/news': typeof DashboardNewsRoute
+  '/dashboard/results': typeof DashboardResultsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard': typeof DashboardIndexRoute
   '/news': typeof NewsIndexRoute
@@ -164,8 +180,10 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/admissions': typeof DashboardAdmissionsRoute
   '/dashboard/gallery': typeof DashboardGalleryRoute
   '/dashboard/news': typeof DashboardNewsRoute
+  '/dashboard/results': typeof DashboardResultsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -185,8 +203,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/admissions'
     | '/dashboard/gallery'
     | '/dashboard/news'
+    | '/dashboard/results'
     | '/news/$slug'
     | '/dashboard/'
     | '/news/'
@@ -203,8 +223,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/admissions'
     | '/dashboard/gallery'
     | '/dashboard/news'
+    | '/dashboard/results'
     | '/news/$slug'
     | '/dashboard'
     | '/news'
@@ -222,8 +244,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/admissions'
     | '/dashboard/gallery'
     | '/dashboard/news'
+    | '/dashboard/results'
     | '/news/$slug'
     | '/dashboard/'
     | '/news/'
@@ -339,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/admissions': {
+      id: '/dashboard/admissions'
+      path: '/admissions'
+      fullPath: '/dashboard/admissions'
+      preLoaderRoute: typeof DashboardAdmissionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/gallery': {
       id: '/dashboard/gallery'
       path: '/gallery'
@@ -351,6 +382,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/dashboard/news'
       preLoaderRoute: typeof DashboardNewsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/results': {
+      id: '/dashboard/results'
+      path: '/results'
+      fullPath: '/dashboard/results'
+      preLoaderRoute: typeof DashboardResultsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/news/': {
@@ -371,14 +409,18 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardAdmissionsRoute: typeof DashboardAdmissionsRoute
   DashboardGalleryRoute: typeof DashboardGalleryRoute
   DashboardNewsRoute: typeof DashboardNewsRoute
+  DashboardResultsRoute: typeof DashboardResultsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAdmissionsRoute: DashboardAdmissionsRoute,
   DashboardGalleryRoute: DashboardGalleryRoute,
   DashboardNewsRoute: DashboardNewsRoute,
+  DashboardResultsRoute: DashboardResultsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
