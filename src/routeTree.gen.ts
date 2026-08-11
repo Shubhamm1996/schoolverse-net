@@ -22,6 +22,8 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PrincipalMessageRouteImport } from './routes/principal-message'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardGalleryRouteImport } from './routes/dashboard.gallery'
+import { Route as DashboardNewsRouteImport } from './routes/dashboard.news'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
@@ -90,6 +92,16 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardGalleryRoute = DashboardGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardNewsRoute = DashboardNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -114,6 +126,8 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/gallery': typeof DashboardGalleryRoute
+  '/dashboard/news': typeof DashboardNewsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -130,6 +144,8 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/gallery': typeof DashboardGalleryRoute
+  '/dashboard/news': typeof DashboardNewsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard': typeof DashboardIndexRoute
   '/news': typeof NewsIndexRoute
@@ -148,6 +164,8 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/principal-message': typeof PrincipalMessageRoute
   '/results': typeof ResultsRoute
+  '/dashboard/gallery': typeof DashboardGalleryRoute
+  '/dashboard/news': typeof DashboardNewsRoute
   '/news/$slug': typeof NewsSlugRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -167,6 +185,8 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/gallery'
+    | '/dashboard/news'
     | '/news/$slug'
     | '/dashboard/'
     | '/news/'
@@ -183,6 +203,8 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/gallery'
+    | '/dashboard/news'
     | '/news/$slug'
     | '/dashboard'
     | '/news'
@@ -200,6 +222,8 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/principal-message'
     | '/results'
+    | '/dashboard/gallery'
+    | '/dashboard/news'
     | '/news/$slug'
     | '/dashboard/'
     | '/news/'
@@ -315,6 +339,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/gallery': {
+      id: '/dashboard/gallery'
+      path: '/gallery'
+      fullPath: '/dashboard/gallery'
+      preLoaderRoute: typeof DashboardGalleryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/news': {
+      id: '/dashboard/news'
+      path: '/news'
+      fullPath: '/dashboard/news'
+      preLoaderRoute: typeof DashboardNewsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/news/': {
       id: '/news/'
       path: '/news'
@@ -333,10 +371,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardGalleryRoute: typeof DashboardGalleryRoute
+  DashboardNewsRoute: typeof DashboardNewsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardGalleryRoute: DashboardGalleryRoute,
+  DashboardNewsRoute: DashboardNewsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
