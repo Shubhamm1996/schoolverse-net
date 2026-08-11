@@ -85,7 +85,23 @@ function Admissions() {
         const path = await uploadToBucket("admission-docs", file, "applications/");
         documents.push({ name: file.name, path });
       }
-      const { error } = await supabase.from("admissions").insert({ ...values, documents });
+      const payload = {
+        student_name: values.student_name,
+        date_of_birth: values.date_of_birth,
+        gender: values.gender,
+        applying_for_class: values.applying_for_class,
+        student_address: values.student_address || null,
+        father_name: values.father_name,
+        mother_name: values.mother_name || null,
+        guardian_phone: values.guardian_phone,
+        guardian_email: values.guardian_email,
+        guardian_occupation: values.guardian_occupation || null,
+        previous_school: values.previous_school || null,
+        previous_class: values.previous_class || null,
+        previous_percentage: values.previous_percentage || null,
+        documents,
+      };
+      const { error } = await supabase.from("admissions").insert(payload);
       if (error) throw error;
       setDone(true);
       form.reset();
@@ -262,7 +278,7 @@ function Field({
   children,
 }: {
   label: string;
-  error?: string;
+  error?: string | undefined;
   children: React.ReactNode;
 }) {
   return (

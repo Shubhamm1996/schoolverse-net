@@ -34,7 +34,7 @@ function AuthPage() {
     if (session) navigate({ to: "/dashboard", replace: true });
   }, [session, navigate]);
 
-  async function signIn(e: React.FormEvent<HTMLFormElement>) {
+  async function signIn(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setBusy(true);
@@ -43,11 +43,14 @@ function AuthPage() {
       password: String(fd.get("password")),
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     navigate({ to: "/dashboard" });
   }
 
-  async function signUp(e: React.FormEvent<HTMLFormElement>) {
+  async function signUp(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setBusy(true);
@@ -60,7 +63,10 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     if (!data.session) toast.success("Check your email to confirm your account.");
     else navigate({ to: "/dashboard" });
   }
