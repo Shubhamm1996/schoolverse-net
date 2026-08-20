@@ -1,12 +1,12 @@
 export const SCHOOL = {
-  name: "St. Aldrin Public School",
-  short: "St. Aldrin",
+  name: "New Saraswati Vidyalaya Sarola",
+  short: "NSVS",
   tagline: "Knowledge · Character · Service",
-  established: 1974,
-  phone: "+91 98765 43210",
+  established: 200,
+  phone: "+91 9637565944",
   email: "office@staldrin.edu.in",
-  address: "12 Cathedral Road, Civil Lines, Nagpur 440001",
-  hours: "Mon – Sat, 8:00 AM – 3:30 PM",
+  address: "Sarola, Burhanpur, MP",
+  hours: "Mon – Sat, 8:00 AM – 5:00 PM",
 };
 
 export const PUBLIC_NAV = [
